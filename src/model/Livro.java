@@ -9,7 +9,6 @@ public class Livro {
     private Date data_lancamento;
     private int quantidade;
     private float preco;
-    private int editora_id;
 
     public int getId() {
         return id;
@@ -49,13 +48,5 @@ public class Livro {
 
     public void setPreco(float preco) {
         this.preco = preco;
-    }
-
-    public int getEditora_id() {
-        return editora_id;
-    }
-
-    public void setEditora_id(int editora_id) {
-        this.editora_id = editora_id;
     }
 }

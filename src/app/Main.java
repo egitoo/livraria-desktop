@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/view/autor_formulario.fxml"));
-        primaryStage.setTitle("Livraria Talkey");
+        primaryStage.setTitle("Livraria IFRO");
         primaryStage.setScene(new Scene(root, 605, 228));
         primaryStage.show();
     }

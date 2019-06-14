@@ -18,7 +18,7 @@ public class LivroDAO {
     }
 
     public void inserir(Livro livro) {
-        String sql = "insert into livros (titulo, data_lancamento, quantidade, preco, editora_id) values (?, ?, ?, ?, ?)";
+        String sql = "insert into livros (titulo, data_lancamento, quantidade, preco) values (?, ?, ?, ?)";
 
         try {
             //Prepara conexão
@@ -27,7 +27,6 @@ public class LivroDAO {
             //stmt.setDate(2, livro.getData_lancamento());
             stmt.setInt(3, livro.getQuantidade());
             stmt.setFloat(4, livro.getPreco());
-            stmt.setInt(5, livro.getEditora_id());
 
             //Executar o comando
             stmt.execute();
@@ -59,7 +58,6 @@ public class LivroDAO {
                 //livro.setData_lancamento(resultados.getDate("data_lancamento"));
                 livro.setQuantidade(resultados.getInt("quantidade"));
                 livro.setPreco(resultados.getFloat("preco"));
-                livro.setEditora_id(resultados.getInt("editora_id"));
 
                 livros.add(livro);
             }
@@ -75,7 +73,7 @@ public class LivroDAO {
     }
 
     public void alterar(Livro livro) {
-        String sql = "update livros set titulo = ?, data_lancamento = ?, quantidade = ?, preco = ?, editora_id = ? where id = ?";
+        String sql = "update livros set titulo = ?, data_lancamento = ?, quantidade = ?, preco = ? where id = ?";
 
         try {
             //Prepara conexão
@@ -84,7 +82,7 @@ public class LivroDAO {
             //stmt.setDate(2, livro.getData_lancamento());
             stmt.setInt(3, livro.getQuantidade());
             stmt.setFloat(4, livro.getPreco());
-            stmt.setInt(5, livro.getEditora_id());
+            stmt.setInt(5, livro.getId());
 
             //Executar
             stmt.execute();
@@ -136,7 +134,6 @@ public class LivroDAO {
                 livro.setData_lancamento(resultados.getDate("data_lancamento"));
                 livro.setQuantidade(resultados.getInt("quantidade"));
                 livro.setPreco(resultados.getFloat("preco"));
-                livro.setEditora_id(resultados.getInt("editora_id"));
             }
 
             //Fechar conexão
