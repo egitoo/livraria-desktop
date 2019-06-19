@@ -15,7 +15,7 @@
       <Label layoutX="378.0" layoutY="80.0" text="Email:" />
       <TextField fx:id="txfNome" layoutX="194.0" layoutY="75.0" />
       <TextField fx:id="txfEmail" layoutX="422.0" layoutY="75.0" />
-      <Button fx:id="btnSalvar" layoutX="369.0" layoutY="288.0" mnemonicParsing="false" onAction="#salvar" text="Salvar" />
+      <Button fx:id="btnSalvar" layoutX="423.0" layoutY="288.0" mnemonicParsing="false" onAction="#salvar" text="Inserir" />
       <Pane prefHeight="44.0" prefWidth="607.0" style="-fx-background-color: #0000A7;">
          <children>
             <Label layoutX="148.0" layoutY="2.0" text="Cadastro de Autores" textFill="WHITE">
@@ -25,16 +25,17 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="btnDeletar" layoutX="273.0" layoutY="288.0" mnemonicParsing="false" onAction="#deletar" text="Deletar" />
-      <Button layoutX="163.0" layoutY="288.0" mnemonicParsing="false" text="Pesquisar" />
+      <Button fx:id="btnDeletar" layoutX="345.0" layoutY="288.0" mnemonicParsing="false" onAction="#deletar" text="Deletar" />
+      <Button fx:id="btnPesquisar" layoutX="172.0" layoutY="288.0" mnemonicParsing="false" onAction="#pesquisar" text="Pesquisar" />
       <Label layoutX="14.0" layoutY="80.0" text="Cod" />
       <TextField fx:id="txfId" layoutX="50.0" layoutY="75.0" prefHeight="26.0" prefWidth="75.0" />
-      <TableView fx:id="Autor" editable="true" layoutX="16.0" layoutY="118.0" prefHeight="155.0" prefWidth="576.0">
+      <TableView fx:id="tableView" editable="true" layoutX="16.0" layoutY="118.0" prefHeight="155.0" prefWidth="576.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="75.0" text="Codigo" />
           <TableColumn fx:id="colNome" prefWidth="242.0" text="Nome" />
             <TableColumn fx:id="colEmail" prefWidth="258.0" text="E-mail" />
         </columns>
       </TableView>
+      <Button fx:id="btnAlterar" layoutX="266.0" layoutY="288.0" mnemonicParsing="false" onAction="#alterar" text="Alterar" />
    </children>
 </AnchorPane>

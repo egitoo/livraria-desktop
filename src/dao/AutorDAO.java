@@ -13,13 +13,13 @@ public class AutorDAO {
 
     private Connection conexao;
 
-    public AutorDAO() {
+    public void conectar() {
         conexao = new ConnectionFactory().getConnection();
     }
 
     public void inserir(Autor autor) {
         String sql = "insert into autores (nome, email) values (?, ?)";
-
+        conectar();
         try {
             //Prepara conexão
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -40,7 +40,7 @@ public class AutorDAO {
     public List<Autor> listarTodos() {
         String sql = "select * from autores";
         List<Autor> autores = new ArrayList<>();
-
+        conectar();
         try {
             //Prepara conexão
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -70,7 +70,7 @@ public class AutorDAO {
 
     public void alterar(Autor autor) {
         String sql = "update autores set nome = ?, email = ? where id = ?";
-
+        conectar();
         try {
             //Prepara conexão
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -90,32 +90,35 @@ public class AutorDAO {
     }
 
     public void deletar(Autor autor) {
-        String sql = "delete from autores where id = ?";
 
-        try {
-            //Prepara conexão
-            PreparedStatement stmt = conexao.prepareStatement(sql);
-            stmt.setInt(1, autor.getId());
+            String sql = "delete from autores where id = ?";
+            conectar();
+            try {
+                //Prepara conexão
+                PreparedStatement stmt = conexao.prepareStatement(sql);
+                stmt.setInt(1, autor.getId());
 
-            //Executar
-            stmt.execute();
+                //Executar
+                stmt.execute();
 
-            //Fechar conexão
-            conexao.close();
+                //Fechar conexão
+                conexao.close();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
         }
 
-    }
 
-    public Autor listarPorId(Autor autor) {
+    public Autor listarPorId(int id) {
         String sql = "select id, nome, email from autores where id = ?";
-
+        Autor autor = new Autor();
+        conectar();
         try {
             //Prepara conexão
             PreparedStatement stmt = conexao.prepareStatement(sql);
-            stmt.setInt(1, autor.getId());
+            stmt.setInt(1, id);
 
             //Executar
             ResultSet resultados = stmt.executeQuery();
