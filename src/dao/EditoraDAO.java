@@ -13,13 +13,13 @@ public class EditoraDAO {
 
     private Connection conexao;
 
-    public EditoraDAO() {
+    public void conectar() {
         conexao = new ConnectionFactory().getConnection();
     }
 
     public void inserir(Editora editora) {
-        String sql = "insert into editoras (nome, site, endereco, bairro, telefone) values (?, ?, ?, ?, ?)";
-
+        String sql = "insert into editoras (nome, site, endereco, bairro, telefone, municipio_id) values (?, ?, ?, ?, ?, ?)";
+        conectar();
         try {
             //Prepara conexão
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -28,6 +28,7 @@ public class EditoraDAO {
             stmt.setString(3, editora.getEndereco());
             stmt.setString(4, editora.getBairro());
             stmt.setString(5, editora.getTelefone());
+            stmt.setInt(6, editora.getMunicipio_id());
 
             //Executar o comando
             stmt.execute();
@@ -43,8 +44,7 @@ public class EditoraDAO {
     public List<Editora> listarTodos() {
         String sql = "select * from editoras";
         List<Editora> editoras = new ArrayList<>();
-
-
+        conectar();
         try {
             //Prepara conexão
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -61,6 +61,7 @@ public class EditoraDAO {
                 editora.setEndereco(resultados.getString("endereco"));
                 editora.setBairro(resultados.getString("bairro"));
                 editora.setTelefone(resultados.getString("telefone"));
+                editora.setMunicipio_id(resultados.getInt("municipio_id"));
 
                 editoras.add(editora);
             }
@@ -76,8 +77,8 @@ public class EditoraDAO {
     }
 
     public void alterar(Editora editora) {
-        String sql = "update editoras set nome = ?, site = ?, endereco = ?, bairro = ?, telefone = ? where id = ?";
-
+        String sql = "update editoras set nome = ?, site = ?, endereco = ?, bairro = ?, telefone = ?, municipio_id = ? where id = ?";
+        conectar();
         try {
             //Prepara conexão
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -86,7 +87,9 @@ public class EditoraDAO {
             stmt.setString(3, editora.getEndereco());
             stmt.setString(4, editora.getBairro());
             stmt.setString(5, editora.getTelefone());
+            stmt.setInt(6, editora.getMunicipio_id());
             stmt.setInt(7, editora.getId());
+
 
             //Executar
             stmt.execute();
@@ -101,7 +104,7 @@ public class EditoraDAO {
 
     public void deletar(Editora editora) {
         String sql = "delete from editoras where id = ?";
-
+        conectar();
         try {
             //Prepara conexão
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -120,9 +123,9 @@ public class EditoraDAO {
     }
 
     public Editora listarPorId(int id) {
-        String sql = "select id, nome, site, endereco, bairro, telefone from editoras where id = ?";
+        String sql = "select * from editoras where id = ?";
         Editora editora = new Editora();
-
+        conectar();
         try {
             //Prepara conexão
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -139,6 +142,7 @@ public class EditoraDAO {
                 editora.setEndereco(resultados.getString("endereco"));
                 editora.setBairro(resultados.getString("bairro"));
                 editora.setTelefone(resultados.getString("telefone"));
+                editora.setMunicipio_id(resultados.getInt("municipio_id"));
             }
 
             //Fechar conexão

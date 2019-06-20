@@ -7,6 +7,15 @@ public class Editora {
     private String endereco;
     private String bairro;
     private String telefone;
+    private int municipio_id;
+
+    public int getMunicipio_id() {
+        return municipio_id;
+    }
+
+    public void setMunicipio_id(int municipio_id) {
+        this.municipio_id = municipio_id;
+    }
 
     public int getId() {
         return id;
